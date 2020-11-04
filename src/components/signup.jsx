@@ -23,10 +23,11 @@ class Signup extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
-
+    const { email, password } = this.state.data;
     try {
       await http.post(`${apiUrl}/auth/signup`, data);
       toast("A new account is opened!");
+      await userService.login(email, password);
       this.props.history.replace("/add/dog");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -51,7 +52,7 @@ class Signup extends Form {
               {this.renderInput("password", "Password", "password")}
               {this.renderInput("firstName", "First Name")}
               {this.renderInput("lastName", "Last Name")}
-              {this.renderButton("Signup")}
+              {this.renderButton("Continues to sign up your doggie!")}
             </form>
           </div>
         </div>

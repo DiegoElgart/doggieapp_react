@@ -2,11 +2,9 @@ import React from "react";
 import PageHeader from "./common/pageHeader";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import http from "../services/httpService";
-import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
 import Select from "react-select";
-import { error } from "jquery";
+import dogService from "../services/dogService";
 
 const sexOptions = [
   { value: 1, label: "Male" },
@@ -17,7 +15,7 @@ const neuteredOptions = [
   { value: 0, label: "No" },
 ];
 
-class DogSignup extends Form {
+class EditDog extends Form {
   state = {
     data: {
       dogName: "",
@@ -26,7 +24,6 @@ class DogSignup extends Form {
       weight: 0,
       neutered: 0,
     },
-
     errors: {},
   };
 
@@ -37,34 +34,44 @@ class DogSignup extends Form {
     weight: Joi.number().integer().label("Weight"),
     neutered: Joi.number().integer().label("Neutered"),
   };
-
   doSubmit = async () => {
     const { data } = this.state;
+    data.dogId = this.props.match.params.id;
+    await dogService.editDog(data);
+    toast("Doggie updated!");
+    this.props.history.replace("/my-dog");
+  };
+  mapToViewModel(dog) {
+    return {
+      dogName: dog.dogName,
+      sex: dog.sex,
+      age: dog.age,
+      weight: dog.weight,
+      neutered: dog.neutered,
+    };
+  }
+  async componentDidMount() {
+    const dogId = this.props.match.params.id;
+    const { data } = await dogService.getDogById(dogId);
+    this.setState({ data: this.mapToViewModel(data[0]) });
+  }
 
-    try {
-      await http.post(`${apiUrl}/user/dog/add`, data);
-
-      toast("A new Doggie has been addeed!");
-      this.props.history.replace("/signin");
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        this.setState({ errors: error });
-      }
-    }
+  handleCancel = () => {
+    this.props.history.push("/my-dog");
   };
 
   render() {
     return (
       <div className='container'>
-        <PageHeader titleText='Doggie Registration Form' />
+        <PageHeader titleText='Edit Doggie Form' />
         <div className='row'>
           <div className='col-12'>
-            <p>Add your Doggie</p>
+            <p>Edit your Doggie</p>
           </div>
         </div>
         <div className='row'>
           <div className='col-lg-6'>
-            <form onSubmit={this.handleSubmit} autoComplete='off' method='POST'>
+            <form onSubmit={this.handleSubmit} autoComplete='off'>
               {this.renderInput("dogName", "Dog Name")}
               <label>Sex</label>
               <Select className='form-group' options={sexOptions} />
@@ -72,7 +79,12 @@ class DogSignup extends Form {
               {this.renderInput("weight", "Weight")}
               <label>Neutered?</label>
               <Select className='form-group' options={neuteredOptions} />
-              {this.renderButton("Add Doggie")}
+              {this.renderButton("Update Doggie")}
+              <button
+                className='btn btn-danger ml-2'
+                onClick={this.handleCancel}>
+                Cancel
+              </button>
             </form>
           </div>
         </div>
@@ -81,4 +93,4 @@ class DogSignup extends Form {
   }
 }
 
-export default DogSignup;
+export default EditDog;

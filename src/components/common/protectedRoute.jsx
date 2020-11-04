@@ -1,0 +1,28 @@
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import userService from "../../services/userService";
+
+const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
+  const currentUser = userService.getCurrentUser();
+
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        // You Shall Not PASS!!
+        if (!currentUser) {
+          return (
+            <Redirect
+              to={{ pathname: "/signin", state: { from: props.location } }}
+            />
+          );
+        }
+
+        // Ok / pay props forward
+        return Component ? <Component {...props} /> : render(props);
+      }}
+    />
+  );
+};
+
+export default ProtectedRoute;

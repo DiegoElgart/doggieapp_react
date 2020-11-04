@@ -12,6 +12,10 @@ import { Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import userService from "./services/userService";
+import MyDog from "./components/myDog";
+import EditDog from "./components/editDog";
+import DeleteDog from "./components/deleteDog";
+// import ProtectedRoute from "./components/common/protectedRoute";
 
 class App extends Component {
   state = {};
@@ -19,7 +23,6 @@ class App extends Component {
   componentDidMount() {
     const user = userService.getCurrentUser();
     this.setState({ user });
-    console.log("Desde App componenteDidMount user.id: " + user.id);
   }
 
   render() {
@@ -33,6 +36,9 @@ class App extends Component {
         </header>
         <main style={{ minHeight: 900 }}>
           <Switch>
+            <Route path='/my-dog/delete/:id' component={DeleteDog} />
+            <Route path='/my-dog/edit/:id' component={EditDog} />
+            <Route path='/my-dog' component={MyDog} />
             <Route path='/add/dog' component={DogSignup} />
             <Route path='/logout' component={Logout} />
             <Route path='/signin' component={Signin} />
