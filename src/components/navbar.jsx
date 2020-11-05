@@ -30,8 +30,15 @@ class Navbar extends Component {
               </li>
               <li className='nav-item'>
                 {user && (
-                  <NavLink className='nav-link' to='/my-dog'>
+                  <NavLink className='nav-link btn' to='/my-dog'>
                     My Dog
+                  </NavLink>
+                )}
+              </li>
+              <li className='nav-item'>
+                {user && (
+                  <NavLink className='nav-link btn' to='/parks'>
+                    Parks & Visits
                   </NavLink>
                 )}
               </li>

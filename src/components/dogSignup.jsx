@@ -44,7 +44,7 @@ class DogSignup extends Form {
     try {
       await http.post(`${apiUrl}/user/dog/add`, data);
 
-      toast("A new Doggie has been addeed!");
+      toast("A new Doggie has been added!");
       this.props.history.replace("/signin");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

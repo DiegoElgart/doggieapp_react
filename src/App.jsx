@@ -15,6 +15,8 @@ import userService from "./services/userService";
 import MyDog from "./components/myDog";
 import EditDog from "./components/editDog";
 import DeleteDog from "./components/deleteDog";
+import Parks from "./components/parks";
+import createPark from "./components/createPark";
 // import ProtectedRoute from "./components/common/protectedRoute";
 
 class App extends Component {
@@ -36,8 +38,10 @@ class App extends Component {
         </header>
         <main style={{ minHeight: 900 }}>
           <Switch>
+            <Route path='/parks/add' component={createPark} />
             <Route path='/my-dog/delete/:id' component={DeleteDog} />
             <Route path='/my-dog/edit/:id' component={EditDog} />
+            <Route path='/parks' component={Parks} />
             <Route path='/my-dog' component={MyDog} />
             <Route path='/add/dog' component={DogSignup} />
             <Route path='/logout' component={Logout} />
