@@ -9,6 +9,7 @@ import "jquery/dist/jquery";
 import "popper.js/dist/popper";
 import "bootstrap/dist/js/bootstrap";
 import { BrowserRouter } from "react-router-dom";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 ReactDOM.render(
   <BrowserRouter>

@@ -13,11 +13,11 @@ export function logout() {
   localStorage.removeItem(tokenKey);
 }
 
-export function getCurrentUser() {
+export async function getCurrentUser() {
   try {
     const jwt = localStorage.getItem(tokenKey);
-
     return jwtDecode(jwt);
+    
   } catch (error) {
     return null;
   }
@@ -29,6 +29,7 @@ export async function login(email, password) {
     password,
   });
   localStorage.setItem(tokenKey, data.token);
+  return data.token;
 }
 
 export default { login, getCurrentUser, logout, getJwt };

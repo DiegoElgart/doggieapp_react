@@ -26,15 +26,18 @@ class Signup extends Form {
     const { email, password } = this.state.data;
     try {
       await http.post(`${apiUrl}/auth/signup`, data);
-      toast("A new account is opened!");
       await userService.login(email, password);
+
+      toast("A new account is opened!");
       this.props.history.replace("/add/dog");
+      window.location.reload();
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: { email: "Email is taken" } });
       }
     }
   };
+
   render() {
     if (userService.getCurrentUser()) return <Redirect to='/' />;
     return (

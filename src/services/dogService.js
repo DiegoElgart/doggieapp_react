@@ -2,7 +2,6 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
 
-// me va a servir para desp crear perros nuevos
 export function createDog(dog) {
   return http.post(`${apiUrl}/user/dog/add`, dog);
 }

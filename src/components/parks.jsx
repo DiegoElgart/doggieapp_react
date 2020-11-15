@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PageHeader from "./common/pageHeader";
-import ParkList from "./parkList";
+import ParkCard from "./parkCard";
 import parkService from "../services/parkService";
 import { Link } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export class Parks extends Component {
           </div>
           <div className='row'>
             {parks.length > 0 &&
-              parks.map(park => <ParkList key={park.parkId} park={park} />)}
+              parks.map(park => <ParkCard key={park.parkId} park={park} />)}
           </div>
         </div>
       </div>

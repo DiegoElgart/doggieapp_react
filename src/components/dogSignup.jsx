@@ -38,6 +38,7 @@ class DogSignup extends Form {
     neutered: Joi.number().integer().label("Neutered"),
   };
 
+  
   doSubmit = async () => {
     const { data } = this.state;
 
@@ -45,7 +46,7 @@ class DogSignup extends Form {
       await http.post(`${apiUrl}/user/dog/add`, data);
 
       toast("A new Doggie has been added!");
-      this.props.history.replace("/signin");
+      this.props.history.replace("/my-dog");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         this.setState({ errors: error });
