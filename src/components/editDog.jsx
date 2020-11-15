@@ -19,9 +19,9 @@ class EditDog extends Form {
   state = {
     data: {
       dogName: "",
-      sex: 0,
       age: 0,
       weight: 0,
+      Sex: 0,
       neutered: 0,
     },
     errors: {},
@@ -29,25 +29,33 @@ class EditDog extends Form {
 
   schema = {
     dogName: Joi.string().min(2).max(255).required().label("Dog name"),
-    sex: Joi.number().integer().label("Sex"),
+    Sex: Joi.object({
+      label: Joi.string(),
+      value: Joi.number().integer(),
+    }),
     age: Joi.number().integer().label("Age"),
     weight: Joi.number().integer().label("Weight"),
-    neutered: Joi.number().integer().label("Neutered"),
+    neutered: Joi.object({
+      label: Joi.string(),
+      value: Joi.number().integer(),
+    }),
   };
   doSubmit = async () => {
     const { data } = this.state;
     data.dogId = this.props.match.params.id;
-    await dogService.editDog(data);
+    const editedDog = { ...data };
+    console.log(editedDog);
+    await dogService.editDog(editedDog);
     toast("Doggie updated!");
     this.props.history.replace("/my-dog");
   };
   mapToViewModel(dog) {
     return {
       dogName: dog.dogName,
-      sex: dog.sex,
+      Sex: sexOptions.find(option => option.value === dog.sex),
       age: dog.age,
       weight: dog.weight,
-      neutered: dog.neutered,
+      neutered: neuteredOptions.find(option => option.value === dog.neutered),
     };
   }
   async componentDidMount() {
@@ -74,11 +82,42 @@ class EditDog extends Form {
             <form onSubmit={this.handleSubmit} autoComplete='off'>
               {this.renderInput("dogName", "Dog Name")}
               <label>Sex</label>
-              <Select className='form-group' options={sexOptions} />
+              <Select
+                name='Sex'
+                className='form-group'
+                options={sexOptions}
+                label='Sex'
+                onChange={e =>
+                  this.handleChange({
+                    currentTarget: {
+                      name: "Sex",
+                      value: e,
+                      array: sexOptions,
+                    },
+                  })
+                }
+                value={this.state.data.Sex || ""}
+              />
               {this.renderInput("age", "Age")}
               {this.renderInput("weight", "Weight")}
               <label>Neutered?</label>
-              <Select className='form-group' options={neuteredOptions} />
+              <Select
+                className='form-group'
+                options={neuteredOptions}
+                placeholder='Select if Neutered'
+                label='neutered'
+                name='neutered'
+                onChange={e =>
+                  this.handleChange({
+                    currentTarget: {
+                      name: "neutered",
+                      value: e,
+                      array: neuteredOptions,
+                    },
+                  })
+                }
+                value={this.state.data.neutered || ""}
+              />
               {this.renderButton("Update Doggie")}
               <button
                 className='btn btn-danger ml-2'

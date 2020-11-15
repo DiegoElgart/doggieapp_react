@@ -7,6 +7,7 @@ import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { error } from "jquery";
+import e from "cors";
 
 const sexOptions = [
   { value: 1, label: "Male" },
@@ -21,27 +22,31 @@ class DogSignup extends Form {
   state = {
     data: {
       dogName: "",
-      sex: 0,
       age: 0,
       weight: 0,
+      Sex: 0,
       neutered: 0,
     },
-
     errors: {},
   };
 
   schema = {
     dogName: Joi.string().min(2).max(255).required().label("Dog name"),
-    sex: Joi.number().integer().label("Sex"),
+    Sex: Joi.object({
+      label: Joi.string(),
+      value: Joi.number().integer(),
+    }),
     age: Joi.number().integer().label("Age"),
     weight: Joi.number().integer().label("Weight"),
-    neutered: Joi.number().integer().label("Neutered"),
+    neutered: Joi.object({
+      label: Joi.string(),
+      value: Joi.number().integer(),
+    }),
   };
 
-  
   doSubmit = async () => {
     const { data } = this.state;
-
+    console.log(this.state);
     try {
       await http.post(`${apiUrl}/user/dog/add`, data);
 
@@ -55,6 +60,8 @@ class DogSignup extends Form {
   };
 
   render() {
+    const state = this.state;
+    console.log(state);
     return (
       <div className='container'>
         <PageHeader titleText='Doggie Registration Form' />
@@ -67,12 +74,46 @@ class DogSignup extends Form {
           <div className='col-lg-6'>
             <form onSubmit={this.handleSubmit} autoComplete='off' method='POST'>
               {this.renderInput("dogName", "Dog Name")}
+
               <label>Sex</label>
-              <Select className='form-group' options={sexOptions} />
+
+              <Select
+                name='Sex'
+                className='form-group'
+                options={sexOptions}
+                label='Sex'
+                onChange={e =>
+                  this.handleChange({
+                    currentTarget: {
+                      name: "Sex",
+                      value: e,
+                      array: sexOptions,
+                    },
+                  })
+                }
+                value={state.data.Sex || ""}
+              />
               {this.renderInput("age", "Age")}
               {this.renderInput("weight", "Weight")}
               <label>Neutered?</label>
-              <Select className='form-group' options={neuteredOptions} />
+              <Select
+                className='form-group'
+                options={neuteredOptions}
+                placeholder='Select if Neutered'
+                label='neutered'
+                name='neutered'
+                onChange={e =>
+                  this.handleChange({
+                    currentTarget: {
+                      name: "neutered",
+                      value: e,
+                      array: neuteredOptions,
+                    },
+                  })
+                }
+                value={state.data.neutered || ""}
+              />
+
               {this.renderButton("Add Doggie")}
             </form>
           </div>

@@ -1,7 +1,6 @@
 import React from "react";
 
 const Table = ({ visit }) => {
-  console.log(visit);
   return (
     <tr>
       <th>{visit.dog_name}</th>

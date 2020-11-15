@@ -6,18 +6,17 @@ import jwtDecode from "jwt-decode";
 const tokenKey = "token";
 
 export function getJwt() {
-  return localStorage.getItem(tokenKey);
+  return sessionStorage.getItem(tokenKey);
 }
 
 export function logout() {
-  localStorage.removeItem(tokenKey);
+  sessionStorage.removeItem(tokenKey);
 }
 
-export async function getCurrentUser() {
+export function getCurrentUser() {
   try {
-    const jwt = localStorage.getItem(tokenKey);
+    const jwt = sessionStorage.getItem(tokenKey);
     return jwtDecode(jwt);
-    
   } catch (error) {
     return null;
   }
@@ -28,8 +27,13 @@ export async function login(email, password) {
     email,
     password,
   });
-  localStorage.setItem(tokenKey, data.token);
+  sessionStorage.setItem(tokenKey, data.token);
   return data.token;
 }
 
-export default { login, getCurrentUser, logout, getJwt };
+export function getUserData(id) {
+  const userObj = http.get(`${apiUrl}/user/${id}`);
+  return userObj;
+}
+
+export default { login, getCurrentUser, logout, getJwt, getUserData };

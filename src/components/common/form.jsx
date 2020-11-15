@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
-
+const sexOptions = [
+  { value: 1, label: "Male" },
+  { value: 0, label: "Female" },
+];
+const neuteredOptions = [
+  { value: 1, label: "Yes" },
+  { value: 0, label: "No" },
+];
 class Form extends Component {
   state = {
     data: {},
     errors: {},
   };
-  
-
 
   validate = () => {
     const options = { abortEarly: false };
@@ -45,6 +50,11 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
+    if (input.name === "Sex" || input.name === "neutered") {
+      data[input.name] = input.array.find(
+        option => option.value === input.value.value
+      );
+    }
 
     this.setState({ data, errors });
   };

@@ -50,7 +50,6 @@ class DoggieCalendar extends Component {
               endAccessor='end'
               defaultView='day'
               onSelectEvent={visit => alert(visit.dogs_groupby_hour)}
-              onSelectSlot
             />
           </div>
         </div>

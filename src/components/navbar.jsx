@@ -3,9 +3,9 @@ import { NavLink, Link } from "react-router-dom";
 
 class Navbar extends Component {
   state = {};
+
   render() {
     const { user } = this.props;
-
     return (
       <nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
         <div className='container'>
@@ -62,7 +62,6 @@ class Navbar extends Component {
               {user && (
                 <React.Fragment>
                   <li className='nav-item'>
-                    <p>Hi!, </p>
                     <NavLink className='nav-item nav-link' to='/logout'>
                       Logout
                     </NavLink>

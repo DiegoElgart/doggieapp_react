@@ -13,7 +13,6 @@ class ParkList extends Component {
     const parkId = this.props.match.params.id;
     const { data } = await parkService.getAllVisitsForPark(parkId);
     if (data.length > 0) this.setState({ visits: data });
-    console.log(data);
   }
   render() {
     const { visits } = this.state;
