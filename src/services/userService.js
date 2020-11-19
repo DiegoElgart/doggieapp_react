@@ -31,8 +31,8 @@ export async function login(email, password) {
   return data.token;
 }
 
-export function getUserData(id) {
-  const userObj = http.get(`${apiUrl}/user/${id}`);
+export async function getUserData(id) {
+  const userObj = await http.get(`${apiUrl}/user/${id}`);
   return userObj;
 }
 

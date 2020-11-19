@@ -6,6 +6,7 @@ import visitService from "../services/visitService";
 import "moment/locale/en-il";
 import "moment-timezone";
 import PageHeader from "./common/pageHeader";
+import { Link } from "react-router-dom";
 
 moment.locale();
 
@@ -19,8 +20,9 @@ class DoggieCalendar extends Component {
 
   async componentDidMount() {
     const parkId = this.props.match.params.id;
+
     const { data } = await visitService.getVisits(parkId);
-    // console.log(data);
+
     let appointments = data;
     for (let i = 0; i < appointments.length; i++) {
       appointments[i].start = moment(appointments[i].start)
@@ -39,10 +41,10 @@ class DoggieCalendar extends Component {
     return (
       <div className='container'>
         <PageHeader titleText='Schedule play time in: ' />
+        <Link to={`/park/calendar/add`}>Add a visit...</Link>
         <div className='row'>
           <div className='col m-5 pt-5'>
             <Calendar
-              selectable
               localizer={localizer}
               events={visits}
               titleAccessor='dogs_groupby_hour'

@@ -7,7 +7,6 @@ import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { error } from "jquery";
-import e from "cors";
 
 const sexOptions = [
   { value: 1, label: "Male" },

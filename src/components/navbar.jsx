@@ -5,7 +5,8 @@ class Navbar extends Component {
   state = {};
 
   render() {
-    const { user } = this.props;
+    const { user, userName } = this.props;
+
     return (
       <nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
         <div className='container'>
@@ -61,6 +62,7 @@ class Navbar extends Component {
               )}
               {user && (
                 <React.Fragment>
+                  <p className='m-2'>Hi, {userName.data}!</p>
                   <li className='nav-item'>
                     <NavLink className='nav-item nav-link' to='/logout'>
                       Logout

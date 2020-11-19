@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
-const sexOptions = [
-  { value: 1, label: "Male" },
-  { value: 0, label: "Female" },
-];
-const neuteredOptions = [
-  { value: 1, label: "Yes" },
-  { value: 0, label: "No" },
-];
+
 class Form extends Component {
   state = {
     data: {},

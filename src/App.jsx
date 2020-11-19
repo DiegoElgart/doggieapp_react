@@ -11,7 +11,7 @@ import DogSignup from "./components/dogSignup";
 import { Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userService from "./services/userService";
+import userService, { getUserData } from "./services/userService";
 import MyDog from "./components/myDog";
 import EditDog from "./components/editDog";
 import DeleteDog from "./components/deleteDog";
@@ -19,26 +19,36 @@ import Parks from "./components/parks";
 import createPark from "./components/createPark";
 import ParkList from "./components/parkList";
 import DoggieCalendar from "./components/DoggieCalendar";
+import FormSchedule from "./components/formSchedule";
 
 class App extends Component {
   state = {};
 
-  componentDidMount() {
+  async componentDidMount() {
     const user = userService.getCurrentUser();
-    this.setState({ user });
+    if (user) {
+      const userName = await getUserData(user.id);
+      this.setState({ user, userName });
+    }
   }
 
   render() {
     const { user } = this.state;
+    const { userName } = this.state;
 
     return (
       <React.Fragment>
         <ToastContainer />
         <header>
-          <Navbar user={user} />
+          <Navbar user={user} userName={userName} />
         </header>
         <main style={{ minHeight: 900 }}>
           <Switch>
+            <Route
+              path='/park/calendar/add'
+              component={FormSchedule}
+              user={user}
+            />
             <Route path='/park/calendar/:id' component={DoggieCalendar} />
             <Route path='/park/schedule/:id' component={ParkList} />
             <Route path='/parks/add' component={createPark} />
