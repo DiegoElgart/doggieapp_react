@@ -15,6 +15,7 @@ class MyDog extends Component {
   }
   render() {
     const { dogs } = this.state;
+    
     return (
       <div className='container'>
         <PageHeader titleText='My Dog Page' />
