@@ -17,7 +17,6 @@ import EditDog from "./components/editDog";
 import DeleteDog from "./components/deleteDog";
 import Parks from "./components/parks";
 import createPark from "./components/createPark";
-import ParkList from "./components/parkList";
 import DoggieCalendar from "./components/DoggieCalendar";
 import FormSchedule from "./components/formSchedule";
 
@@ -50,7 +49,7 @@ class App extends Component {
               user={user}
             />
             <Route path='/park/calendar/:id' component={DoggieCalendar} />
-            <Route path='/park/schedule/:id' component={ParkList} />
+
             <Route path='/parks/add' component={createPark} />
             <Route path='/my-dog/delete/:id' component={DeleteDog} />
             <Route path='/my-dog/edit/:id' component={EditDog} />

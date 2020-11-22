@@ -29,7 +29,7 @@ export class FormSchedule extends Component {
     try {
       await visitService.addVisit(visit);
       toast("Visit Scheduled!");
-      this.props.history.replace(`/park/schedule/${visit.parkId}`);
+      this.props.history.replace(`/park/calendar/${visit.parkId}`);
     } catch (ex) {
       if (ex.response && ex.response.status !== 200) {
         this.setState({ errors: ex });
