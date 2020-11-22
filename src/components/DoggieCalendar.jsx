@@ -41,7 +41,9 @@ class DoggieCalendar extends Component {
     return (
       <div className='container'>
         <PageHeader titleText='Schedule play time in: ' />
-        <Link to={`/park/calendar/add`}>Add a visit...</Link>
+        <Link to={`/park/calendar/add/${this.props.match.params.id}`}>
+          Add a visit...
+        </Link>
         <div className='row'>
           <div className='col m-5 pt-5'>
             <Calendar

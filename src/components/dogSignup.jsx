@@ -45,14 +45,13 @@ class DogSignup extends Form {
 
   doSubmit = async () => {
     const { data } = this.state;
-    console.log(this.state);
     try {
       await http.post(`${apiUrl}/user/dog/add`, data);
 
       toast("A new Doggie has been added!");
       this.props.history.replace("/my-dog");
     } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
+      if (ex.response && ex.response.status !== 200) {
         this.setState({ errors: error });
       }
     }

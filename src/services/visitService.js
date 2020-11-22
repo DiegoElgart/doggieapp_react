@@ -6,9 +6,10 @@ export function getVisits(parkId) {
   return http.get(`${apiUrl}/visit/groupbyhour/${parkId}`);
 }
 
-export function addVisit() {
-  return http.post(`${apiUrl}/visit/add`);
+export function addVisit(visit) {
+  return http.post(`${apiUrl}/visit/add`, visit);
 }
 export default {
   getVisits,
+  addVisit,
 };

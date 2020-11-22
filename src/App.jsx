@@ -45,7 +45,7 @@ class App extends Component {
         <main style={{ minHeight: 900 }}>
           <Switch>
             <Route
-              path='/park/calendar/add'
+              path='/park/calendar/add/:id'
               component={FormSchedule}
               user={user}
             />
