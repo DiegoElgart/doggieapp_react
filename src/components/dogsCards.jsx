@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const DogCard = ({ dog }) => {
   let dogSex = "";
@@ -42,10 +41,6 @@ const DogCard = ({ dog }) => {
             <b> Neutered: </b>
             {neutered}
           </p>
-          <Link to={`/my-dog/edit/${dog.dogId}`}>Edit</Link> |
-          <Link className='ml-2' to={`/my-dog/delete/${dog.dogId}`}>
-            Delete
-          </Link>
         </div>
       </div>
     </div>

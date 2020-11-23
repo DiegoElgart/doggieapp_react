@@ -19,10 +19,15 @@ export function editDog(dog) {
 export function getDogById(id) {
   return http.get(`${apiUrl}/my-dog/${id}`);
 }
+
+export function getAllDogs() {
+  return http.get(`${apiUrl}/dog/all`);
+}
 export default {
   createDog,
   getDog,
   deleteDog,
   editDog,
   getDogById,
+  getAllDogs,
 };

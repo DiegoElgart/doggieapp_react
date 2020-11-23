@@ -54,7 +54,7 @@ export class createPark extends Form {
               {this.renderInput("parkAddress", " Park Address")}
               {this.renderButton("Add Park")}
               <button
-                className=' btn btn-danger ml-2'
+                className=' btn btn-danger m-3'
                 onClick={this.handleCancel}>
                 Cancel
               </button>

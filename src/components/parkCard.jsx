@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ParkCard = ({ park }) => {
   return (
-    <div className='card'>
+    <div className='card m-3'>
       <div className='card-body'>
         <h5 className='card-title'>Name: {park.parkName}</h5>
         <hr />

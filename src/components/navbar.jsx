@@ -44,6 +44,14 @@ class Navbar extends Component {
                   </NavLink>
                 )}
               </li>
+
+              <li className='nav-item '>
+                {user && (
+                  <NavLink to='/dogs/search' className='btn btn-success ml-2'>
+                    Search for Doggies!
+                  </NavLink>
+                )}
+              </li>
             </ul>
             <ul className='navbar-nav ml-auto'>
               {!user && (

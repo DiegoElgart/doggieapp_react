@@ -11,8 +11,16 @@ class About extends Component {
         <div className='row'>
           <div className='col-12'>
             <p>
-              Aca tengo que escribir un about sobre mi app para poder tenerla
-              mas pro como corresponde.
+              Doggie App allows you to schedule visits in differents dog parks
+              sprad across your city.
+            </p>
+            <p>
+              Check which of your Doggie friends are going to be and where! (and
+              also those dogs that don't get along with yours)
+            </p>
+            <p>
+              Add your favorite parks and discovers new ones that you didnt't
+              know about them!
             </p>
           </div>
         </div>

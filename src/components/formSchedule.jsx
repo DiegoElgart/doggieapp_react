@@ -48,13 +48,15 @@ export class FormSchedule extends Component {
       },
     });
   };
-
+  handleCancel = () => {
+    this.props.history.push("/calendar");
+  };
   render() {
     const { dogs } = this.state;
     return (
-      <div className='container'>
+      <div className='container-md border'>
         <form onSubmit={this.handleSubmit}>
-          <div className='form-group col-3'>
+          <div className='form-group w-25'>
             <label>Choose your Dog!</label>
             <select
               className='form-control'
@@ -101,7 +103,10 @@ export class FormSchedule extends Component {
             />
           </div>
 
-          <button className='btn btn-info'>Add visit</button>
+          <button className='btn btn-info m-3'>Add visit</button>
+          <button className=' btn btn-danger m-3' onClick={this.handleCancel}>
+            Cancel
+          </button>
         </form>
       </div>
     );
