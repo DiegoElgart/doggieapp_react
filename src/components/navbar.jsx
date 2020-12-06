@@ -24,9 +24,11 @@ class Navbar extends Component {
             <span className='navbar-toggler-icon'></span>
           </button>
           <div className='collapse navbar-collapse' id='navbarNav'>
-            <ul className='navbar-nav'>
+            <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
               <li className='nav-item'>
-                <NavLink className='nav-link' to='/about'>
+                <NavLink
+                  className='nav-link  d-flex justify-content-center'
+                  to='/about'>
                   About
                 </NavLink>
               </li>
@@ -45,24 +47,25 @@ class Navbar extends Component {
                 )}
               </li>
 
-              <li className='nav-item '>
+              <li className='nav-item d-flex justify-content-center'>
                 {user && (
-                  <NavLink to='/dogs/search' className='btn btn-success ml-2'>
+                  <NavLink to='/dogs/search' className='btn btn-success '>
                     Search for Doggies!
                   </NavLink>
                 )}
               </li>
-            </ul>
-            <ul className='navbar-nav ml-auto'>
+
               {!user && (
                 <React.Fragment>
-                  <li className='nav-item'>
+                  <li className='nav-item  d-flex justify-content-center'>
                     <NavLink className='nav-link' to='/signin'>
                       Signin
                     </NavLink>
                   </li>
                   <li className='nav-item'>
-                    <NavLink className='nav-link' to='/signup'>
+                    <NavLink
+                      className='nav-link  d-flex justify-content-center'
+                      to='/signup'>
                       Signup
                     </NavLink>
                   </li>
@@ -70,9 +73,13 @@ class Navbar extends Component {
               )}
               {user && (
                 <React.Fragment>
-                  <p className='m-2'>Hi, {userName.data}!</p>
+                  <p className=' d-flex justify-content-center m-2'>
+                    Hi, {userName.data}!
+                  </p>
                   <li className='nav-item'>
-                    <NavLink className='nav-item nav-link' to='/logout'>
+                    <NavLink
+                      className='nav-link  d-flex justify-content-center'
+                      to='/logout'>
                       Logout
                     </NavLink>
                   </li>

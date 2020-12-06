@@ -4,7 +4,7 @@ const SearchBox = props => {
   return (
     <input
       type='search'
-      className='form-control col-4'
+      className='form-control col-6'
       placeholder={props.placeholder}
       onChange={props.handleChange}
     />

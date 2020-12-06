@@ -49,7 +49,9 @@ export class FormSchedule extends Component {
     });
   };
   handleCancel = () => {
-    this.props.history.push("/calendar");
+    const { visit } = this.state;
+    visit.parkId = this.props.match.params.id;
+    this.props.history.push(`/park/calendar/${visit.parkId}`);
   };
   render() {
     const { dogs } = this.state;
